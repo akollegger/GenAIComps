@@ -1,0 +1,4 @@
+# Neo4j volumes created by service
+neo4j_data/
+neo4j_import/
+neo4j_start/
