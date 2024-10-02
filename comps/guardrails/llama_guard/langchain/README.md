@@ -36,8 +36,8 @@ pip install -r requirements.txt
 export HF_TOKEN=${your_hf_api_token}
 volume=$PWD/data
 model_id="meta-llama/Meta-Llama-Guard-2-8B"
-docker pull ghcr.io/huggingface/tgi-gaudi:2.0.1
-docker run -p 8088:80 -v $volume:/data --runtime=habana -e HABANA_VISIBLE_DEVICES=all -e OMPI_MCA_btl_vader_single_copy_mechanism=none --cap-add=sys_nice --ipc=host -e HTTPS_PROXY=$https_proxy -e HTTP_PROXY=$https_proxy -e HF_TOKEN=$HF_TOKEN ghcr.io/huggingface/tgi-gaudi:2.0.1 --model-id $model_id --max-input-length 1024 --max-total-tokens 2048
+docker pull ghcr.io/huggingface/tgi-gaudi:2.0.5
+docker run -p 8088:80 -v $volume:/data --runtime=habana -e HABANA_VISIBLE_DEVICES=all -e OMPI_MCA_btl_vader_single_copy_mechanism=none --cap-add=sys_nice --ipc=host -e HTTPS_PROXY=$https_proxy -e HTTP_PROXY=$https_proxy -e HF_TOKEN=$HF_TOKEN ghcr.io/huggingface/tgi-gaudi:2.0.5 --model-id $model_id --max-input-length 1024 --max-total-tokens 2048
 ```
 
 ### 1.3 Verify the TGI Gaudi Service
@@ -51,7 +51,7 @@ curl 127.0.0.1:8088/generate \
 
 ### 1.4 Start Guardrails Service
 
-Optional: If you have deployed a Guardrails model with TGI Gaudi Service other than default model (i.e., `meta-llama/Meta-Llama-Guard-2-8B`) [from section 1.2](## 1.2 Start TGI Gaudi Service), you will need to add the eviornment variable `SAFETY_GUARD_MODEL_ID` containing the model id. For example, the following informs the Guardrails Service the deployed model used LlamaGuard2:
+Optional: If you have deployed a Guardrails model with TGI Gaudi Service other than default model (i.e., `meta-llama/Meta-Llama-Guard-2-8B`) [from section 1.2](#12-start-tgi-gaudi-service), you will need to add the eviornment variable `SAFETY_GUARD_MODEL_ID` containing the model id. For example, the following informs the Guardrails Service the deployed model used LlamaGuard2:
 
 ```bash
 export SAFETY_GUARD_MODEL_ID="meta-llama/Meta-Llama-Guard-2-8B"
