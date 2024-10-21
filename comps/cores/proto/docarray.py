@@ -175,6 +175,7 @@ class LLMParamsDoc(BaseDoc):
     presence_penalty: float = 0.0
     repetition_penalty: float = 1.03
     streaming: bool = True
+    language: str = "auto"  # can be "en", "zh"
 
     chat_template: Optional[str] = Field(
         default=None,
@@ -212,6 +213,7 @@ class LLMParams(BaseDoc):
     presence_penalty: float = 0.0
     repetition_penalty: float = 1.03
     streaming: bool = True
+    language: str = "auto"  # can be "en", "zh"
 
     chat_template: Optional[str] = Field(
         default=None,
@@ -282,6 +284,15 @@ class LVMVideoDoc(BaseDoc):
     chunk_duration: float
     prompt: str
     max_new_tokens: conint(ge=0, le=1024) = 512
+
+
+class SDInputs(BaseDoc):
+    prompt: str
+    num_images_per_prompt: int = 1
+
+
+class SDOutputs(BaseDoc):
+    images: list
 
 
 class ImagePath(BaseDoc):
